@@ -1,38 +1,47 @@
-(function () {
-  // Modl constructor
-  this.Modl = function (options = {}) {
-    // Element references
-    this.closeButton = null;
-    this.modlWrapper = null;
-    this.modl = null;
+/*!
+ * Modl.js v0.0.1
+ * (c) 2018 Ivan Sieder
+ * Released under the MIT License.
+ */
 
-    // Determine proper transition end method
-    this.transitionEnd = transitionSelect();
+(function() {
+  "use strict";
 
-    // Default options
-    const defaults = {
-      animation: {
-        enabled: true,
-        duration: 300,
-        effect: "ease"
-      },
-      className: "fade",
-      closeButton: {
-        enabled: true
-      },
-      content: "",
-      overlay: {
-        enabled: true
-      },
-      position: "center",
-      sizes: {
-        width: 900,
-      },
-      theme: "light"
-    }
+  // default options
+  const defaults = {
+    animation: {
+      enabled: true,
+      duration: 300,
+      effect: "ease"
+    },
+    className: "fade",
+    closeButton: {
+      enabled: true
+    },
+    content: "",
+    overlay: {
+      enabled: true
+    },
+    position: "center",
+    sizes: {
+      width: 900
+    },
+    theme: "light"
+  };
 
+  // element references
+  let closeButton;
+  let modlWrapper;
+  let modl;
+  let options;
+
+  // determine proper transition end method
+  let transitionEnd = transitionSelect();
+
+  // modl constructor
+  window.Modl = function(userOptions = {}) {
     // Extend defaults with passed options
-    this.options = Object.assign({}, defaults, options);
+    options = Object.assign({}, defaults, userOptions);
 
     // Build the Modl
     buildModl.call(this);
@@ -44,24 +53,28 @@
      * Add the open class and check if the modl is taller than the window
      * and if so, the anchored class will be added
      */
-    this.modlWrapper.className = this.modlWrapper.className + " modl-open";
-    this.modl.className = this.modl.className + (this.modl.offsetHeight > window.innerHeight ? " modl-open modl-anchored" : " modl-open");
-  }
+    modlWrapper.className = modlWrapper.className + " modl-open";
+    modl.className =
+      modl.className +
+      (modl.offsetHeight > window.innerHeight
+        ? " modl-open modl-anchored"
+        : " modl-open");
+  };
 
-  Modl.prototype.close = function () {
+  Modl.prototype.close = function() {
     // Listen for css transitioned event and remove DOM nodes afterwards
-    this.modl.addEventListener(this.transitionEnd, () => {
-      this.modlWrapper.parentNode.removeChild(this.modlWrapper);
+    modl.addEventListener(transitionEnd, () => {
+      modlWrapper.parentNode.removeChild(modlWrapper);
     });
 
     // Remove open classes
-    this.modlWrapper.className = this.modlWrapper.className.replace(" modl-open", "");
-    this.modl.className = this.modl.className.replace(" modl-open", "");
+    modlWrapper.className = modlWrapper.className.replace(" modl-open", "");
+    modl.className = modl.className.replace(" modl-open", "");
 
     // Change opacity
-    this.modlWrapper.style.opacity = "0";
-    this.modl.style.opacity = "0";
-  }
+    modlWrapper.style.opacity = "0";
+    modl.style.opacity = "0";
+  };
 
   // Build a Modl instance
   function buildModl() {
@@ -73,26 +86,28 @@
      * If the content is an HTML string, append the HTML plainly
      * If the content is a DOM node, append it's content
      */
-    if (typeof this.options.content === "string") {
-      content = this.options.content;
+    if (typeof options.content === "string") {
+      content = options.content;
     } else {
-      content = this.options.content.innerHTML;
+      content = options.content.innerHTML;
     }
 
     // Create document fragment
     fragment = document.createDocumentFragment();
 
     // Create Modl wrapper
-    this.modlWrapper = document.createElement("div");
-    this.modlWrapper.className = `modl-wrapper`;
-    this.modlWrapper.style.transitionProperty = "opacity";
-    this.modlWrapper.style.transitionDuration = `${this.options.animation.duration / 1000}s`;
-    this.modlWrapper.style.transitionTimingFunction = this.options.animation.effect;
+    modlWrapper = document.createElement("div");
+    modlWrapper.className = `modl-wrapper`;
+    modlWrapper.style = {
+      transitionProperty: "opacity",
+      transitionDuration: `${options.animation.duration / 1000}s`,
+      transitionTimingFunction: options.animation.effect
+    };
 
     // Generate correct Modl positioning
-    let horizontal = null;
-    let vertical = null;
-    switch (this.options.position) {
+    let horizontal;
+    let vertical;
+    switch (options.position) {
       case "center":
         horizontal = "center";
         vertical = "center";
@@ -131,37 +146,39 @@
         break;
     }
 
-    this.modlWrapper.style.justifyContent = horizontal;
-    this.modlWrapper.style.alignItems = vertical;
+    modlWrapper.style.justifyContent = horizontal;
+    modlWrapper.style.alignItems = vertical;
 
     // Create Modl
-    this.modl = document.createElement("div");
-    this.modl.className = `modl ${this.options.className}`;
-    this.modl.style.width = `${this.options.sizes.width}px`;
-    this.modl.style.maxWidth = `100%`;
-    this.modl.style.transitionProperty = "opacity";
-    this.modl.style.transitionDuration = `${this.options.animation.duration / 1000}s`
-    this.modl.style.transitionTimingFunction = this.options.animation.effect
-    this.modl.style.opacity = "0";
-    this.modl.style.zIndex = "20";
-    this.modlWrapper.appendChild(this.modl);
+    modl = document.createElement("div");
+    modl.className = `modl ${options.className}`;
+    modl.style = {
+      width: `${options.sizes.width}px`,
+      maxWidth: `100%`,
+      transitionProperty: "opacity",
+      transitionDuration: `${options.animation.duration / 1000}s`,
+      transitionTimingFunction: options.animation.effect,
+      opacity: "0",
+      zIndex: "20"
+    };
+    modlWrapper.appendChild(modl);
 
-    // If closeButton option is true, add a close button
-    if (this.options.closeButton.enabled === true) {
-      this.closeButton = document.createElement("button");
-      this.closeButton.className = "modl-close";
-      this.closeButton.innerHTML = "×";
-      this.modl.appendChild(this.closeButton);
+    // If closeButton option is truthy, add a close button
+    if (options.closeButton.enabled) {
+      closeButton = document.createElement("button");
+      closeButton.className = "modl-close";
+      closeButton.innerHTML = "×";
+      modl.appendChild(closeButton);
     }
 
     // Construct content area
     contentWrapper = document.createElement("div");
     contentWrapper.className = "modl-content";
     contentWrapper.innerHTML = content;
-    this.modl.appendChild(contentWrapper);
+    modl.appendChild(contentWrapper);
 
     // Append Modl to document fragment
-    fragment.appendChild(this.modlWrapper);
+    fragment.appendChild(modlWrapper);
 
     // Append document fragment to body
     document.body.appendChild(fragment);
@@ -170,31 +187,38 @@
     injectStyles.call(this);
 
     // Show Modl
-    setTimeout(() => this.modlWrapper.style.opacity = "1", 0);
+    setTimeout(() => (modlWrapper.style.opacity = "1"), 0);
     setTimeout(() => {
       // Check if the modl is longer than the screen
-      const style = window.getComputedStyle ? window.getComputedStyle(this.modl) : this.modl.currentStyle;
+      const style = window.getComputedStyle
+        ? window.getComputedStyle(modl)
+        : modl.currentStyle;
 
-      if (this.modl.offsetHeight + (parseInt(style.marginTop) || 0) + (parseInt(style.marginBottom) || 0) > window.innerHeight) {
-        this.modlWrapper.style.alignItems = "flex-start";
+      if (
+        modl.offsetHeight +
+          (parseInt(style.marginTop) || 0) +
+          (parseInt(style.marginBottom) || 0) >
+        window.innerHeight
+      ) {
+        modlWrapper.style.alignItems = "flex-start";
       }
 
       // Make the Modl visible
-      this.modl.style.opacity = "1"
+      modl.style.opacity = "1";
     }, 0);
   }
 
   function initEvents() {
-    if (this.options.closeButton.enabled === true) {
-      this.closeButton.addEventListener("click", this.close.bind(this));
+    if (options.closeButton.enabled === true) {
+      closeButton.addEventListener("click", this.close.bind(this));
     }
 
-    if (this.options.overlay.enabled) {
-      this.modl.addEventListener("click", e => {
+    if (options.overlay.enabled) {
+      modl.addEventListener("click", e => {
         e.stopPropagation();
       });
 
-      this.modlWrapper.addEventListener("click", this.close.bind(this));
+      modlWrapper.addEventListener("click", this.close.bind(this));
     }
   }
 
@@ -207,7 +231,7 @@
     let modl_text_color;
     let modl_close_button_color;
 
-    switch (this.options.theme) {
+    switch (options.theme) {
       default:
         wrapper_background_color = "rgba(62, 61, 64, 0.8)";
         modl_background_color = "#ffffff";
@@ -262,7 +286,7 @@
         top: 0;
         width: 1em;
       }
-    `
+    `;
 
     style.type = "text/css";
     if (style.styleSheet) {
@@ -281,4 +305,4 @@
     if (element.style.OTransition) return "oTransitionEnd";
     return "transitionend";
   }
-})()
+})();
