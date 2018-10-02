@@ -6,10 +6,18 @@ const UglifyJS = require("uglify-js");
 
 const stripWhitespace = new StripWhitespace();
 
-const { code: transpiledCode } = babel.transformFileSync(
-  path.resolve(__dirname, "../src/index.js")
-);
-const { code: strippedCode } = stripWhitespace.strip(transpiledCode);
-const { code: uglifiedCode } = UglifyJS.minify(strippedCode);
+{
+  const { code: transpiledCode } = babel.transformFileSync(path.resolve(__dirname, "../src/index.js"));
+  const { code: strippedCode } = stripWhitespace.strip(transpiledCode);
+  const { code: uglifiedCode } = UglifyJS.minify(strippedCode);
 
-fs.writeFileSync(path.resolve(__dirname, "../dist/modl.min.js"), uglifiedCode);
+  fs.writeFileSync(path.resolve(__dirname, "../dist/modl.min.js"), uglifiedCode);
+}
+
+commonjs: {
+  const { code: transpiledCode } = babel.transformFileSync(path.resolve(__dirname, "../src/index.common.js"));
+  const { code: strippedCode } = stripWhitespace.strip(transpiledCode);
+  const { code: uglifiedCode } = UglifyJS.minify(strippedCode);
+
+  fs.writeFileSync(path.resolve(__dirname, "../dist/modl.common.min.js"), uglifiedCode);
+}

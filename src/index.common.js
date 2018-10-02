@@ -4,7 +4,7 @@
  * Released under the MIT License.
  */
 
-(function() {
+module.exports = (function() {
   "use strict";
 
   // default options
@@ -39,7 +39,7 @@
   let transitionEnd = transitionSelect();
 
   // modl constructor
-  window.Modl = window.Modl || function(userOptions = {}) {
+  const Modl = function(userOptions = {}) {
     // Extend defaults with passed options
     options = Object.assign({}, defaults, userOptions);
 
@@ -305,4 +305,6 @@
     if (element.style.OTransition) return "oTransitionEnd";
     return "transitionend";
   }
+
+  return Modl;
 })();

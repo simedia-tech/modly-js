@@ -1,8 +1,7 @@
 {
-  "name": "modl-js",
+  "name": "modljs",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "Lightweight modal window library",
   "scripts": {
     "build": "npm run lint && node scripts/build.js",
     "test": "npm run build && jest",
@@ -12,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/ivansieder/modl-js.git"
   },
-  "author": "Ivan Sieder",
+  "author": "Ivan Sieder <ivan@sieder.xyz> (https://www.simedia.com/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ivansieder/modl-js/issues"
