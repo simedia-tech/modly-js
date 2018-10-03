@@ -7,6 +7,10 @@
     "test": "npm run build && jest",
     "lint": "prettier --write src/*.js"
   },
+  "files": [
+    "dist/"
+  ],
+  "main": "dist/modly.min.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ivansieder/modly-js.git"
