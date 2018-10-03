@@ -39,6 +39,11 @@ let transitionEnd = transitionSelect();
 
 // modly constructor
 const Modly = function(userOptions = {}) {
+  // only one modly at a time is allowed,
+  // so we clean up any existing ones before.
+  if (modlyWrapper) {
+    this.close.bind(this);
+  }
   // Extend defaults with passed options
   options = Object.assign({}, defaults, userOptions);
 
@@ -64,6 +69,11 @@ Modly.prototype.close = function() {
   // Listen for css transitioned event and remove DOM nodes afterwards
   modly.addEventListener(transitionEnd, () => {
     modlyWrapper.parentNode.removeChild(modlyWrapper);
+
+    closeButton = undefined;
+    modlyWrapper = undefined;
+    modly = undefined;
+    options = undefined;
   });
 
   // Remove open classes
