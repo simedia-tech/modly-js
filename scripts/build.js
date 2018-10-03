@@ -4,6 +4,10 @@ const path = require("path");
 const StripWhitespace = require("strip-whitespace");
 const UglifyJS = require("uglify-js");
 
+if (!fs.existsSync(path.resolve(__dirname, "../dist"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../dist"));
+}
+
 const stripWhitespace = new StripWhitespace();
 
 {

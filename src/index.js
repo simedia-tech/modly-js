@@ -39,27 +39,29 @@
   let transitionEnd = transitionSelect();
 
   // modl constructor
-  window.Modl = window.Modl || function(userOptions = {}) {
-    // Extend defaults with passed options
-    options = Object.assign({}, defaults, userOptions);
+  window.Modl =
+    window.Modl ||
+    function(userOptions = {}) {
+      // Extend defaults with passed options
+      options = Object.assign({}, defaults, userOptions);
 
-    // Build the Modl
-    buildModl.call(this);
+      // Build the Modl
+      buildModl.call(this);
 
-    // Initialize events on the Modl
-    initEvents.call(this);
+      // Initialize events on the Modl
+      initEvents.call(this);
 
-    /**
-     * Add the open class and check if the modl is taller than the window
-     * and if so, the anchored class will be added
-     */
-    modlWrapper.className = modlWrapper.className + " modl-open";
-    modl.className =
-      modl.className +
-      (modl.offsetHeight > window.innerHeight
-        ? " modl-open modl-anchored"
-        : " modl-open");
-  };
+      /**
+       * Add the open class and check if the modl is taller than the window
+       * and if so, the anchored class will be added
+       */
+      modlWrapper.className = modlWrapper.className + " modl-open";
+      modl.className =
+        modl.className +
+        (modl.offsetHeight > window.innerHeight
+          ? " modl-open modl-anchored"
+          : " modl-open");
+    };
 
   Modl.prototype.close = function() {
     // Listen for css transitioned event and remove DOM nodes afterwards
