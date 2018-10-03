@@ -1,6 +1,7 @@
-const babel = require("@babel/core");
+const babel = require("rollup-plugin-babel");
 const fs = require("fs");
 const path = require("path");
+const rollup = require("rollup").rollup;
 const StripWhitespace = require("strip-whitespace");
 const UglifyJS = require("uglify-js");
 
@@ -10,10 +11,19 @@ if (!fs.existsSync(path.resolve(__dirname, "../dist"))) {
 
 const stripWhitespace = new StripWhitespace();
 
-{
-  const { code: transpiledCode } = babel.transformFileSync(path.resolve(__dirname, "../src/index.js"));
-  const { code: strippedCode } = stripWhitespace.strip(transpiledCode);
+(async () => {
+  const bundle = await rollup({
+    input: path.resolve(__dirname, "../src/index.js"),
+    plugins: [
+      babel({
+        exclude: "node_modules/**"
+      })
+    ]
+  });
+  const { code: rollupCode } = await bundle.generate({ format: "umd" });
+  // const { code: transpiledCode } = babel.transformFileSync(rollupCode);
+  const { code: strippedCode } = stripWhitespace.strip(rollupCode);
   const { code: uglifiedCode } = UglifyJS.minify(strippedCode);
 
   fs.writeFileSync(path.resolve(__dirname, "../dist/modl.min.js"), uglifiedCode);
-}
+})().catch(console.error)

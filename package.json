@@ -27,6 +27,8 @@
     "prettier": "^1.14.3",
     "puppeteer": "^1.8.0",
     "regenerator-runtime": "^0.12.1",
+    "rollup": "^0.66.3",
+    "rollup-plugin-babel": "^4.0.3",
     "strip-whitespace": "^1.0.7",
     "uglify-js": "^3.4.9"
   }
