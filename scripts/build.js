@@ -17,12 +17,3 @@ const stripWhitespace = new StripWhitespace();
 
   fs.writeFileSync(path.resolve(__dirname, "../dist/modl.min.js"), uglifiedCode);
 }
-
-// Common.js
-{
-  const { code: transpiledCode } = babel.transformFileSync(path.resolve(__dirname, "../src/index.common.js"));
-  const { code: strippedCode } = stripWhitespace.strip(transpiledCode);
-  const { code: uglifiedCode } = UglifyJS.minify(strippedCode);
-
-  fs.writeFileSync(path.resolve(__dirname, "../dist/modl.common.min.js"), uglifiedCode);
-}
