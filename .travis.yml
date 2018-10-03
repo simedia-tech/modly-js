@@ -13,5 +13,12 @@ cache:
 install:
   - yarn install
 script:
-  - yarn build
   - yarn test
+
+deploy:
+  provider: releases
+  api_key: "9a0b453b80fc0fb0fde1a9a234d53a1b4acae9c4"
+  file: "dist/modl.min.js"
+  skip_cleanup: true
+  on:
+    tags: true
