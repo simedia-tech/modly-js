@@ -1,6 +1,7 @@
 # Modl.js
-[[https://travis-ci.org/simedia-tech/modl-js.svg?branch=master]]
 *Lightweight modal window library*
+
+[![Build Status](https://travis-ci.org/simedia-tech/modl-js.svg?branch=master)](https://travis-ci.org/simedia-tech/modl-js)
 
 ## Installation
 Install Modl.js as a npm dependency or grab it from the CDN
