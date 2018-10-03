@@ -25,10 +25,10 @@ beforeAll(async () => {
   await startWebserver();
 });
 
-// afterAll(() => {
-//   browser.close();
-//   webserver.close();
-// });
+afterAll(() => {
+  browser.close();
+  webserver.close();
+});
 
 function startWebserver() {
   return new Promise((resolve, reject) => {
