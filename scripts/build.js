@@ -4,6 +4,10 @@ const path = require("path");
 const StripWhitespace = require("strip-whitespace");
 const UglifyJS = require("uglify-js");
 
+if (!fs.existsSync(path.resolve(__dirname, "../dist"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../dist"));
+}
+
 const stripWhitespace = new StripWhitespace();
 
 {
@@ -11,7 +15,7 @@ const stripWhitespace = new StripWhitespace();
   const { code: strippedCode } = stripWhitespace.strip(transpiledCode);
   const { code: uglifiedCode } = UglifyJS.minify(strippedCode);
 
-  fs.writeFileSync(path.resolve(__dirname, "../modl.min.js"), uglifiedCode);
+  fs.writeFileSync(path.resolve(__dirname, "../dist/modl.min.js"), uglifiedCode);
 }
 
 // Common.js
@@ -20,5 +24,5 @@ const stripWhitespace = new StripWhitespace();
   const { code: strippedCode } = stripWhitespace.strip(transpiledCode);
   const { code: uglifiedCode } = UglifyJS.minify(strippedCode);
 
-  fs.writeFileSync(path.resolve(__dirname, "../modl.common.min.js"), uglifiedCode);
+  fs.writeFileSync(path.resolve(__dirname, "../dist/modl.common.min.js"), uglifiedCode);
 }
