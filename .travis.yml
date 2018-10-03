@@ -4,7 +4,7 @@ node_js: "node"
 deploy:
   provider: releases
   api_key: " 9a0b453b80fc0fb0fde1a9a234d53a1b4acae9c4"
-  file: "dist.js"
+  file: "modl.min.js"
   skip_cleanup: true
   on:
     tags: true
