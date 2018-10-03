@@ -1,4 +1,4 @@
-# Modl.js [https://travis-ci.org/simedia-tech/modl-js.svg?branch=master]
+# Modl.js [[https://travis-ci.org/simedia-tech/modl-js.svg?branch=master]]
 *Lightweight modal window library*
 
 ## Installation
