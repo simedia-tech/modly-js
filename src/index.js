@@ -4,7 +4,6 @@
  * Released under the MIT License.
  */
 
-// (function() {
 "use strict";
 
 // default options
@@ -39,29 +38,27 @@ let options;
 let transitionEnd = transitionSelect();
 
 // modly constructor
-window.Modly =
-  window.Modly ||
-  function(userOptions = {}) {
-    // Extend defaults with passed options
-    options = Object.assign({}, defaults, userOptions);
+const Modly = function(userOptions = {}) {
+  // Extend defaults with passed options
+  options = Object.assign({}, defaults, userOptions);
 
-    // Build the Modly
-    buildModly.call(this);
+  // Build the Modly
+  buildModly.call(this);
 
-    // Initialize events on the Modly
-    initEvents.call(this);
+  // Initialize events on the Modly
+  initEvents.call(this);
 
-    /**
-     * Add the open class and check if the modly is taller than the window
-     * and if so, the anchored class will be added
-     */
-    modlyWrapper.className = modlyWrapper.className + " modly-open";
-    modly.className =
-      modly.className +
-      (modly.offsetHeight > window.innerHeight
-        ? " modly-open modly-anchored"
-        : " modly-open");
-  };
+  /**
+   * Add the open class and check if the modly is taller than the window
+   * and if so, the anchored class will be added
+   */
+  modlyWrapper.className = modlyWrapper.className + " modly-open";
+  modly.className =
+    modly.className +
+    (modly.offsetHeight > window.innerHeight
+      ? " modly-open modly-anchored"
+      : " modly-open");
+};
 
 Modly.prototype.close = function() {
   // Listen for css transitioned event and remove DOM nodes afterwards
@@ -307,4 +304,5 @@ function transitionSelect() {
   if (element.style.OTransition) return "oTransitionEnd";
   return "transitionend";
 }
-// })();
+
+export default Modly;

@@ -20,7 +20,7 @@ const stripWhitespace = new StripWhitespace();
       })
     ]
   });
-  const { code: rollupCode } = await bundle.generate({ format: "umd" });
+  const { code: rollupCode } = await bundle.generate({ format: "umd", name: "Modly" });
   const { code: strippedCode } = stripWhitespace.strip(rollupCode);
   const { code: uglifiedCode } = UglifyJS.minify(strippedCode);
 
