@@ -1,24 +1,22 @@
 language: node_js
-node_js: "node"
-
+node_js: node
 dist: trusty
 sudo: required
-
 addons:
   chrome: stable
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
 install:
-  - yarn install
+- yarn install
 script:
-  - yarn test
+- yarn test
 
 deploy:
   provider: releases
-  api_key: "9a0b453b80fc0fb0fde1a9a234d53a1b4acae9c4"
-  file: "dist/modl.min.js"
-  skip_cleanup: true
+  api_key:
+    secure: ZNFZmmtITQq2+fRCDLHFfmB2Atwu1DLL9bOdoWPatijZxIkL9/qR3Kmj7RieSf4adOSTsiEKFEexsYnrLyv27evnR8Ab6Qmp29yKUhZQDdfiCkzx9kBJJnNY3U77HaSrp9NoUuDqfWZ3VBkHFLdhvKcoLB82YBnDRzig7Z1Qu8wm/t7uUeaqmU/hJgQBuwDjzhhQoM+6OmlgrtYku69GxyaLKI0d3ysoVLRMSieaFH0SDQ7kN3mipvy7YmJMzc8FoUK6UC77jZXUq/jQz2lMCfgPoboNp4SPpuha1q4M2VDFGx2KHk8HuiVRYhudaKih3evXCbzK5PJOMUNX1F7tmiu1h+4TixaMaGbZ7qktSJPKDo+CZWW7D4h4DenQHVoAEosWix3w0Ri7zzMhyVcOB30iYUk6XSbPLfJxz62pRVFvD/dCK5M6fFwPU7LHNTauG75buShwDW+v+irsRVlYVinglFGcXS8f39/oo9fFi45TZCCvHy1w9nvkP01wQtwXw1SdXG7csuesnnPMic4JBA3TEx02/LkjXcspLrlRb3zo4Zkp43jfRBv813n9zIdDqYVNHEJpxsZob6BXvuB76pF0k7PunpHV+IDLZhSbwfHwOGnyqnu5Nws8G0pg3AqiPzE9ywBL/jONKxesoSRgtP1Au3/OD6wjPRh5yDjs4Rg=
+  file: dist/modl.min.js
   on:
-    tags: true
+    repo: simedia-tech/modl-js
