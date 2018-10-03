@@ -1,15 +1,15 @@
-# Modl.js
+# Modly.js
 *Lightweight modal window library*
 
-[![Build Status](https://travis-ci.org/simedia-tech/modl-js.svg?branch=master)](https://travis-ci.org/simedia-tech/modl-js)
+[![Build Status](https://travis-ci.org/simedia-tech/modly-js.svg?branch=master)](https://travis-ci.org/simedia-tech/modly-js)
 
 ## Installation
-Install Modl.js as a npm dependency or grab it from the CDN
+Install Modly.js as a npm dependency or grab it from the CDN
 
 ```shell
 # yarn
-yarn add modljs --dev
+yarn add modly-js --dev
 
 # npm
-npm i modljs --save-dev
+npm i modly-js --save-dev
 ```

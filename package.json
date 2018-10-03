@@ -1,5 +1,5 @@
 {
-  "name": "modljs",
+  "name": "modly-js",
   "version": "0.0.1",
   "description": "Lightweight modal window library",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ivansieder/modl-js.git"
+    "url": "git+https://github.com/ivansieder/modly-js.git"
   },
   "author": "Ivan Sieder <ivan@sieder.xyz> (https://www.simedia.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ivansieder/modl-js/issues"
+    "url": "https://github.com/ivansieder/modly-js/issues"
   },
-  "homepage": "https://github.com/ivansieder/modl-js#readme",
+  "homepage": "https://github.com/ivansieder/modly-js#readme",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",

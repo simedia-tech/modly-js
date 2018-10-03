@@ -45,58 +45,58 @@ function delay(timeout) {
 describe("basic", () => {
   const app = `${baseUrl}examples/basic.html`;
 
-  test("should open an empty modl with an overlay and a close button, if no parameters are passed", async () => {
+  test("should open an empty modly with an overlay and a close button, if no parameters are passed", async () => {
     await page.goto(app);
 
     await delay(300);
 
     await page.waitForSelector(
-      ".modl-wrapper.modl-open .modl.fade.modl-open .modl-content",
+      ".modly-wrapper.modly-open .modly.fade.modly-open .modly-content",
       { visible: true }
     );
 
     await page.screenshot({ path: "images/basic.png" });
 
-    const modlWrapperStyles = JSON.parse(
+    const modlyWrapperStyles = JSON.parse(
       await page.evaluate(() =>
         JSON.stringify(
-          getComputedStyle(document.querySelector(".modl-wrapper.modl-open"))
+          getComputedStyle(document.querySelector(".modly-wrapper.modly-open"))
         )
       )
     );
-    const modlStyles = JSON.parse(
+    const modlyStyles = JSON.parse(
       await page.evaluate(() =>
         JSON.stringify(
           getComputedStyle(
             document.querySelector(
-              ".modl-wrapper.modl-open .modl.fade.modl-open"
+              ".modly-wrapper.modly-open .modly.fade.modly-open"
             )
           )
         )
       )
     );
-    const modlContent = await page.evaluate(
+    const modlyContent = await page.evaluate(
       () =>
         document.querySelector(
-          ".modl-wrapper.modl-open .modl.fade.modl-open .modl-content"
+          ".modly-wrapper.modly-open .modly.fade.modly-open .modly-content"
         ).innerHTML
     );
     const closeButtonContent = await page.evaluate(
       () =>
         document.querySelector(
-          ".modl-wrapper.modl-open .modl.fade.modl-open .modl-close"
+          ".modly-wrapper.modly-open .modly.fade.modly-open .modly-close"
         ).innerHTML
     );
 
-    expect(modlWrapperStyles.alignItems).toBe("center");
-    expect(modlWrapperStyles.backgroundColor).toBe("rgba(62, 61, 64, 0.8)");
-    expect(modlWrapperStyles.display).toBe("flex");
-    expect(modlWrapperStyles.justifyContent).toBe("center");
+    expect(modlyWrapperStyles.alignItems).toBe("center");
+    expect(modlyWrapperStyles.backgroundColor).toBe("rgba(62, 61, 64, 0.8)");
+    expect(modlyWrapperStyles.display).toBe("flex");
+    expect(modlyWrapperStyles.justifyContent).toBe("center");
 
-    expect(modlStyles.backgroundColor).toBe("rgb(255, 255, 255)");
-    expect(modlStyles.width).toBe("900px");
+    expect(modlyStyles.backgroundColor).toBe("rgb(255, 255, 255)");
+    expect(modlyStyles.width).toBe("900px");
 
-    expect(modlContent).toBe("");
+    expect(modlyContent).toBe("");
     expect(closeButtonContent).toBe("×");
   });
 });
@@ -110,7 +110,7 @@ describe("basic", () => {
     await delay(300);
 
     await page.waitForSelector(
-      ".modl-wrapper.modl-open .modl.fade.modl-open .modl-content",
+      ".modly-wrapper.modly-open .modly.fade.modly-open .modly-content",
       { visible: true }
     );
 
@@ -118,7 +118,7 @@ describe("basic", () => {
 
     const closeButtonContent = await page.evaluate(() =>
       document.querySelector(
-        ".modl-wrapper.modl-open .modl.fade.modl-open .modl-close"
+        ".modly-wrapper.modly-open .modly.fade.modly-open .modly-close"
       )
     );
 

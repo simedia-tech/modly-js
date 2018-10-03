@@ -21,9 +21,8 @@ const stripWhitespace = new StripWhitespace();
     ]
   });
   const { code: rollupCode } = await bundle.generate({ format: "umd" });
-  // const { code: transpiledCode } = babel.transformFileSync(rollupCode);
   const { code: strippedCode } = stripWhitespace.strip(rollupCode);
   const { code: uglifiedCode } = UglifyJS.minify(strippedCode);
 
-  fs.writeFileSync(path.resolve(__dirname, "../dist/modl.min.js"), uglifiedCode);
+  fs.writeFileSync(path.resolve(__dirname, "../dist/modly.min.js"), uglifiedCode);
 })().catch(console.error)
