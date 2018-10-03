@@ -1,24 +1,13 @@
 language: node_js
 node_js: "node"
 
-deploy:
-  provider: releases
-  api_key: " 9a0b453b80fc0fb0fde1a9a234d53a1b4acae9c4"
-  file: "modl.min.js"
-  skip_cleanup: true
-  on:
-    tags: true
-
-dist: trusty
-
+dist: stretch
 sudo: false
 
 addons:
   chrome: stable
-
 before_install:
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-
 cache:
   yarn: true
   directories:
