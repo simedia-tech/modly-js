@@ -144,8 +144,8 @@ function buildModly() {
   injectStyles.call(this);
 
   // Show Modly
-  const modlyWrapperClass = modlyWrapper.className + " modly-open";
-  const modlyClassName = modly.className + " modly-open";
+  let modlyWrapperClass = modlyWrapper.className + " modly-open";
+  let modlyClassName = modly.className + " modly-open";
 
   // Check if the modly is longer than the screen and apply a separate class
   const style = window.getComputedStyle
