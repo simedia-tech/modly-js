@@ -13,14 +13,14 @@
   "main": "dist/modly.min.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ivansieder/modly-js.git"
+    "url": "git+https://github.com/simedia-tech/modly-js.git"
   },
   "author": "Ivan Sieder <ivan@sieder.xyz> (https://www.simedia.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ivansieder/modly-js/issues"
+    "url": "https://github.com/simedia-tech/modly-js/issues"
   },
-  "homepage": "https://github.com/ivansieder/modly-js#readme",
+  "homepage": "https://github.com/simedia-tech/modly-js#readme",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
@@ -31,7 +31,7 @@
     "prettier": "^1.14.3",
     "puppeteer": "^1.8.0",
     "regenerator-runtime": "^0.12.1",
-    "rollup": "^0.66.3",
+    "rollup": "^0.66.4",
     "rollup-plugin-babel": "^4.0.3",
     "strip-whitespace": "^1.0.7",
     "uglify-js": "^3.4.9"
