@@ -51,7 +51,7 @@ describe("basic", () => {
     await delay(300);
 
     await page.waitForSelector(
-      ".modly-wrapper.modly-open .modly.fade.modly-open .modly-content",
+      ".modly-wrapper.modly-open .modly.modly-open .modly-content",
       { visible: true }
     );
 
@@ -69,7 +69,7 @@ describe("basic", () => {
         JSON.stringify(
           getComputedStyle(
             document.querySelector(
-              ".modly-wrapper.modly-open .modly.fade.modly-open"
+              ".modly-wrapper.modly-open .modly.modly-open"
             )
           )
         )
@@ -78,13 +78,13 @@ describe("basic", () => {
     const modlyContent = await page.evaluate(
       () =>
         document.querySelector(
-          ".modly-wrapper.modly-open .modly.fade.modly-open .modly-content"
+          ".modly-wrapper.modly-open .modly.modly-open .modly-content"
         ).innerHTML
     );
     const closeButtonContent = await page.evaluate(
       () =>
         document.querySelector(
-          ".modly-wrapper.modly-open .modly.fade.modly-open .modly-close"
+          ".modly-wrapper.modly-open .modly.modly-open .modly-close"
         ).innerHTML
     );
 
@@ -110,7 +110,7 @@ describe("basic", () => {
     await delay(300);
 
     await page.waitForSelector(
-      ".modly-wrapper.modly-open .modly.fade.modly-open .modly-content",
+      ".modly-wrapper.modly-open .modly.modly-open .modly-content",
       { visible: true }
     );
 
@@ -118,7 +118,7 @@ describe("basic", () => {
 
     const closeButtonContent = await page.evaluate(() =>
       document.querySelector(
-        ".modly-wrapper.modly-open .modly.fade.modly-open .modly-close"
+        ".modly-wrapper.modly-open .modly.modly-open .modly-close"
       )
     );
 

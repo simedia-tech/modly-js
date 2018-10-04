@@ -112,6 +112,7 @@ function buildModly() {
 
   // Create Modly
   modly = document.createElement("div");
+  modly.className = `modly`;
   modly.style.width = `${options.sizes.width}px`;
   modly.style.maxWidth = "100%";
   modly.style.transitionDuration = `${options.animation.duration / 1000}s`;
