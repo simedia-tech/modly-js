@@ -42,8 +42,9 @@ const Modly = function(userOptions = {}) {
   // only one modly at a time is allowed,
   // so we clean up any existing ones before.
   if (modlyWrapper) {
-    this.close.bind(this);
+    this.close.call(this, true);
   }
+
   // Extend defaults with passed options
   options = Object.assign({}, defaults, userOptions);
 
@@ -65,24 +66,41 @@ const Modly = function(userOptions = {}) {
       : " modly-open");
 };
 
-Modly.prototype.close = function() {
+Modly.prototype.close = function(event, immediateClose = false) {
   // Listen for css transitioned event and remove DOM nodes afterwards
-  modly.addEventListener(transitionEnd, () => {
+  if (immediateClose) {
     modlyWrapper.parentNode.removeChild(modlyWrapper);
+
+    // Remove open classes
+    modlyWrapper.className = modlyWrapper.className.replace(" modly-open", "");
+    modly.className = modly.className.replace(" modly-open", "");
+
+    // Change opacity
+    modlyWrapper.style.opacity = "0";
+    modly.style.opacity = "0";
 
     closeButton = undefined;
     modlyWrapper = undefined;
     modly = undefined;
     options = undefined;
-  });
+  } else {
+    modly.addEventListener(transitionEnd, () => {
+      modlyWrapper.parentNode.removeChild(modlyWrapper);
 
-  // Remove open classes
-  modlyWrapper.className = modlyWrapper.className.replace(" modly-open", "");
-  modly.className = modly.className.replace(" modly-open", "");
+      closeButton = undefined;
+      modlyWrapper = undefined;
+      modly = undefined;
+      options = undefined;
+    });
 
-  // Change opacity
-  modlyWrapper.style.opacity = "0";
-  modly.style.opacity = "0";
+    // Remove open classes
+    modlyWrapper.className = modlyWrapper.className.replace(" modly-open", "");
+    modly.className = modly.className.replace(" modly-open", "");
+
+    // Change opacity
+    modlyWrapper.style.opacity = "0";
+    modly.style.opacity = "0";
+  }
 };
 
 // Build a Modly instance
@@ -107,11 +125,11 @@ function buildModly() {
   // Create Modly wrapper
   modlyWrapper = document.createElement("div");
   modlyWrapper.className = `modly-wrapper`;
-  modlyWrapper.style = [
-    `transitionProperty: opacity`,
-    `transitionDuration: ${options.animation.duration / 1000}s`,
-    `transitionTimingFunction: options.animation.effect`
-  ].join(";");
+  modlyWrapper.style.transitionProperty = "opacity";
+  modlyWrapper.style.transitionDuration = `${options.animation.duration /
+    1000}s`;
+  modlyWrapper.style.transitionTimingFunction = options.animation.effect;
+  modlyWrapper.style.opacity = "0";
 
   // Generate correct Modly positioning
   let horizontal;
@@ -161,15 +179,8 @@ function buildModly() {
   // Create Modly
   modly = document.createElement("div");
   modly.className = `modly ${options.className}`;
-  modly.style.cssText = [
-    `width: ${options.sizes.width}px`,
-    `maxWidth: 100%`,
-    `transitionProperty: opacity`,
-    `transitionDuration: ${options.animation.duration / 1000}s`,
-    `transitionTimingFunction: options.animation.effect`,
-    `opacity: 0`,
-    `zIndex: 20`
-  ].join(";");
+  modly.style.width = `${options.sizes.width}px`;
+  modly.style.maxWidth = "100%";
   modlyWrapper.appendChild(modly);
 
   // If closeButton option is truthy, add a close button
