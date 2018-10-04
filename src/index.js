@@ -10,10 +10,9 @@
 const defaults = {
   animation: {
     enabled: true,
-    duration: 300,
-    effect: "ease"
+    duration: 300
   },
-  className: "fade",
+  className: "",
   closeButton: {
     enabled: true
   },
@@ -101,10 +100,9 @@ function buildModly() {
 
   // Create Modly wrapper
   modlyWrapper = document.createElement("div");
-  modlyWrapper.className = `modly-wrapper`;
+  modlyWrapper.className = `modly-wrapper ${options.className}`;
   modlyWrapper.style.transitionDuration = `${options.animation.duration /
     1000}s`;
-  modlyWrapper.style.transitionTimingFunction = options.animation.effect;
 
   // Generate correct Modly positioning
   let { horizontal, vertical } = generatePosition();
@@ -114,7 +112,6 @@ function buildModly() {
 
   // Create Modly
   modly = document.createElement("div");
-  modly.className = `modly ${options.className}`;
   modly.style.width = `${options.sizes.width}px`;
   modly.style.maxWidth = "100%";
   modly.style.transitionDuration = `${options.animation.duration / 1000}s`;
@@ -259,6 +256,7 @@ function injectStyles() {
         opacity: 0;
         overflow-y: auto;
         transition-property: opacity;
+        transition-timing-function: ease;
       }
 
       .modly-wrapper.modly-anchored {
@@ -274,6 +272,7 @@ function injectStyles() {
         border-radius: 5px;
         opacity: 0;
         transition-property: opacity;
+        transition-timing-function: ease;
       }
     
       .modly * {
