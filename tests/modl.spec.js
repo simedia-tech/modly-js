@@ -88,7 +88,7 @@ describe("basic", () => {
         ).innerHTML
     );
 
-    expect(modlyWrapperStyles.alignItems).toBe("center");
+    expect(modlyWrapperStyles.alignItems).toBe("flex-start");
     expect(modlyWrapperStyles.backgroundColor).toBe("rgba(62, 61, 64, 0.8)");
     expect(modlyWrapperStyles.display).toBe("flex");
     expect(modlyWrapperStyles.justifyContent).toBe("center");

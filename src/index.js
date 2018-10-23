@@ -20,7 +20,6 @@ const defaults = {
   overlay: {
     enabled: true
   },
-  position: "center",
   sizes: {
     width: 900
   },
@@ -65,6 +64,7 @@ Modly.prototype.close = function(event, callback) {
   // Remove open classes
   modlyWrapper.className = modlyWrapper.className.replace(" modly-open", "");
   modly.className = modly.className.replace(" modly-open", "");
+  document.body.classList.remove("modly-body");
 };
 
 // Bootstrap modly
@@ -92,8 +92,13 @@ function buildModly() {
   if (typeof options.content === "string") {
     content = options.content;
   } else {
-    content = options.content.innerHTML;
+    content = options.content.outerHTML;
   }
+
+  options.modly_body_width =
+    document.documentElement.clientWidth -
+    (window.innerWidth - document.documentElement.clientWidth);
+  console.log(options.modly_body_width);
 
   // Create document fragment
   fragment = document.createDocumentFragment();
@@ -103,12 +108,6 @@ function buildModly() {
   modlyWrapper.className = `modly-wrapper ${options.className}`;
   modlyWrapper.style.transitionDuration = `${options.animation.duration /
     1000}s`;
-
-  // Generate correct Modly positioning
-  let { horizontal, vertical } = generatePosition();
-
-  modlyWrapper.style.justifyContent = horizontal;
-  modlyWrapper.style.alignItems = vertical;
 
   // Create Modly
   modly = document.createElement("div");
@@ -161,6 +160,8 @@ function buildModly() {
 
   modlyWrapper.className = modlyWrapperClass;
   modly.className = modlyClassName;
+
+  document.body.classList.add("modly-body");
 }
 
 function initEvents() {
@@ -175,52 +176,6 @@ function initEvents() {
 
     modlyWrapper.addEventListener("click", this.close.bind(this));
   }
-}
-
-function generatePosition() {
-  let horizontal;
-  let vertical;
-
-  switch (options.position) {
-    case "center":
-      horizontal = "center";
-      vertical = "center";
-      break;
-    case "top":
-      horizontal = "center";
-      vertical = "flex-start";
-      break;
-    case "top-right":
-      horizontal = "flex-end";
-      vertical = "flex-start";
-      break;
-    case "right":
-      horizontal = "flex-end";
-      vertical = "center";
-      break;
-    case "bottom-right":
-      horizontal = "flex-end";
-      vertical = "flex-end";
-      break;
-    case "bottom":
-      horizontal = "center";
-      vertical = "flex-end";
-      break;
-    case "bottom-left":
-      horizontal = "flex-start";
-      vertical = "flex-end";
-      break;
-    case "left":
-      horizontal = "flex-start";
-      vertical = "center";
-      break;
-    case "top-left":
-      horizontal = "flex-start";
-      vertical = "flex-start";
-      break;
-  }
-
-  return { horizontal, vertical };
 }
 
 function injectStyles() {
@@ -242,6 +197,10 @@ function injectStyles() {
   }
 
   const cssContent = `
+      .modly-body{
+        overflow-y:hidden;
+        max-width: ${options.modly_body_width}px;
+      }
       .modly-wrapper * {
         box-sizing: border-box;
       }
@@ -258,6 +217,9 @@ function injectStyles() {
         overflow-y: auto;
         transition-property: opacity;
         transition-timing-function: ease;
+        justify-content: center;
+        align-items: flex-start;
+        z-index: 1000;
       }
 
       .modly-wrapper.modly-anchored {
@@ -274,6 +236,10 @@ function injectStyles() {
         opacity: 0;
         transition-property: opacity;
         transition-timing-function: ease;
+        overflow-y: auto;
+        top: calc(50% - 1.5em);
+        transform: translateY(-50%);
+        max-height: calc(100% - 3em)
       }
     
       .modly * {
