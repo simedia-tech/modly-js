@@ -129,7 +129,7 @@ function buildModly() {
   // Construct content area
   contentWrapper = document.createElement("div");
   contentWrapper.className = "modly-content";
-  contentWrapper.innerHTML = content;
+  contentWrapper.outerHTML = content;
   modly.appendChild(contentWrapper);
 
   // Append Modly to document fragment
