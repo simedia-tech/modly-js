@@ -92,7 +92,7 @@ function buildModly() {
   if (typeof options.content === "string") {
     content = options.content;
   } else {
-    content = options.content.innerHTML;
+    content = options.content.outerHTML;
   }
 
   // Create document fragment
@@ -129,7 +129,7 @@ function buildModly() {
   // Construct content area
   contentWrapper = document.createElement("div");
   contentWrapper.className = "modly-content";
-  contentWrapper.outerHTML = content;
+  contentWrapper.innerHTML = content;
   modly.appendChild(contentWrapper);
 
   // Append Modly to document fragment
