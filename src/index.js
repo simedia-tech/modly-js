@@ -92,7 +92,7 @@ function buildModly() {
   if (typeof options.content === "string") {
     content = options.content;
   } else {
-    content = options.content.innerHTML;
+    content = options.content.outerHTML;
   }
 
   // Create document fragment
