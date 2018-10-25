@@ -258,6 +258,7 @@ function injectStyles() {
         overflow-y: auto;
         transition-property: opacity;
         transition-timing-function: ease;
+        z-index: 1000;
       }
 
       .modly-wrapper.modly-anchored {
