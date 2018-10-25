@@ -156,7 +156,7 @@ function buildModly() {
       (parseInt(style.marginBottom) || 0) >
     window.innerHeight
   ) {
-    modlyWrapperClass += " modly-anchored";
+    modly.style.alignItems = "flex-start";
   }
 
   modlyWrapper.className = modlyWrapperClass;
@@ -258,10 +258,6 @@ function injectStyles() {
         overflow-y: auto;
         transition-property: opacity;
         transition-timing-function: ease;
-      }
-
-      .modly-wrapper.modly-anchored {
-        align-items: flex-start;
       }
     
       .modly {
