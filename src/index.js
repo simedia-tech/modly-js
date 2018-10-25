@@ -233,8 +233,6 @@ function injectStyles() {
   let modly_background_color;
   let modly_text_color;
   let modly_close_button_color;
-  let body_scrollbar_width =
-    window.innerWidth - document.documentElement.clientWidth;
 
   switch (options.theme) {
     default:
@@ -248,8 +246,7 @@ function injectStyles() {
   const cssContent = `
       .modly-body{
         overflow-y:hidden;
-        max-width: ${document.documentElement.clientWidth -
-          body_scrollbar_width}px;
+        max-width: ${document.documentElement.clientWidth}px;
       }
 
       .modly-wrapper * {
