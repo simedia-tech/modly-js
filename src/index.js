@@ -65,6 +65,7 @@ Modly.prototype.close = function(event, callback) {
   // Remove open classes
   modlyWrapper.className = modlyWrapper.className.replace(" modly-open", "");
   modly.className = modly.className.replace(" modly-open", "");
+  document.body.classList.remove("modly-body");
 };
 
 // Bootstrap modly
@@ -161,6 +162,7 @@ function buildModly() {
 
   modlyWrapper.className = modlyWrapperClass;
   modly.className = modlyClassName;
+  document.body.classList.add("modly-body");
 }
 
 function initEvents() {
@@ -231,6 +233,8 @@ function injectStyles() {
   let modly_background_color;
   let modly_text_color;
   let modly_close_button_color;
+  let body_scrollbar_width =
+    window.innerWidth - document.documentElement.clientWidth;
 
   switch (options.theme) {
     default:
@@ -242,6 +246,12 @@ function injectStyles() {
   }
 
   const cssContent = `
+      .modly-body{
+        overflow-y:hidden;
+        max-width: ${document.documentElement.clientWidth -
+          body_scrollbar_width}px;
+      }
+
       .modly-wrapper * {
         box-sizing: border-box;
       }
@@ -258,12 +268,17 @@ function injectStyles() {
         overflow-y: auto;
         transition-property: opacity;
         transition-timing-function: ease;
+        overflow:hidden;
       }
 
       .modly-wrapper.modly-anchored {
         align-items: flex-start;
       }
-    
+
+      .modly-wrapper.modly-open {
+        overflow:auto;
+      }
+
       .modly {
         background-color: ${modly_background_color};
         color: ${modly_text_color};
@@ -283,7 +298,7 @@ function injectStyles() {
       .modly-open {
         opacity: 1;
       }
-    
+
       .modly-close {
         background: none;
         border: 0;
