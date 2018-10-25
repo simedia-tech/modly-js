@@ -262,10 +262,9 @@ function injectStyles() {
         bottom: 0;
         left: 0;
         opacity: 0;
-        overflow-y: auto;
+        overflow-y: hidden;
         transition-property: opacity;
         transition-timing-function: ease;
-        overflow:hidden;
       }
 
       .modly-wrapper.modly-anchored {
@@ -273,7 +272,7 @@ function injectStyles() {
       }
 
       .modly-wrapper.modly-open {
-        overflow:auto;
+        overflow-y:auto;
       }
 
       .modly {
