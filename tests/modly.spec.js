@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const puppeteer = require("puppeteer");
+require("regenerator-runtime/runtime");
 
 // bootstrap webserver to serve example files
 const app = express();
