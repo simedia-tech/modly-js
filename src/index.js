@@ -158,6 +158,7 @@ function buildModly() {
     window.innerHeight
   ) {
     modlyWrapperClass += " modly-anchored";
+    modlyWrapper.style.alignItems = "flex-start";
   }
 
   modlyWrapper.className = modlyWrapperClass;
